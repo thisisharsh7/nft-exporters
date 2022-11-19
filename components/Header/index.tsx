@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { toast } from "react-toastify";
+import logo from './logo.png';
+import Image from "next/image";
 
 export default function Header() {
   const wallet = useWallet();
@@ -25,18 +27,9 @@ export default function Header() {
   return (
     <header className="header">
       <Link href="/" passHref>
-        <p className="text-[#1B1A17] text-3xl font-medium underline underline-offset-2 hover:text-[#1A3263] transition-all duration-150 ease-linear hidden sm:block">
-          Multi Send
-        </p>
+        <Image src={logo} alt="" width={150}/>
       </Link>
-
-      <Link href="/" passHref>
-        <p className="text-primary-main text-3xl font-medium underline underline-offset-2 hover:text-[#1B1A17] transition-all duration-150 ease-linear sm:hidden">
-          M-Send
-        </p>
-      </Link>
-
-      <WalletMultiButton className="bg-[#E45826] hover:bg-[#ff891c] rounded-sm" />
+      <WalletMultiButton className="walletBtn" />
     </header>
   );
 }

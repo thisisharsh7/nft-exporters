@@ -9,7 +9,7 @@ import WalletContextProvider from "../components/WalletContextProvider";
 import { toast } from "react-toastify";
 import "../styles/globals.css";
 
-export type SolanaNetworkType = "mainnet-beta" | "devnet";
+export type SolanaNetworkType = "devnet";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [solanaNetwork, setSolanaNetwork] =
