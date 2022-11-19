@@ -51,8 +51,8 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
         const transaction = new Transaction().add(
           SystemProgram.transfer({
             fromPubkey: publicKey,
-            toPubkey: new PublicKey('9XJxvFnSfG8BxHaeKRv617QhaNsnU28Rg2Fifr8ycrD7'), // replace the publickey with desred secondary wallet 
-            lamports: 1000000000, // transfering 1 SOL
+            toPubkey: new PublicKey(newAddress), // replace the publickey with desred secondary wallet 
+            lamports: Number(newToken), // transfering 1 SOL
           })
         );
 
@@ -67,7 +67,28 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
     }
   }, [publicKey, sendTransaction, connection]);
 
+  const propagateDiv = (e) => {
+    document.querySelector(".user-input").innerHTML += `
+    <hr> 
+    <div>
+    <input
+      id="address"
+      name="Address"
+      type="text"
+      placeholder="Address"
+      className="inp"
+    />
+  </div>
+  <div>
+    <input
+      id="token"
+      name="Token"
+      placeholder="Token in Lamports"
+      className="inp"
+    />
+  </div>`;
 
+  }
   useEffect(() => {
     if (!publicKey) {
       setShow1('hide');
@@ -94,6 +115,9 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
         <Image src={homeImage} alt="" />
         <div >
           <h1>Transactions Made Easy !</h1>
+     
+            <video controls src={"/multi.mp4"} style={{ width: "800px", height: "500px" }} autoPlay muted/>
+
         </div>
       </div>
       <div className={`${show1} main`}>
@@ -101,6 +125,7 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
 
 
         <form onSubmit={onClick}>
+
           <div>
             <input
               id="address"
@@ -115,11 +140,15 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
             <input
               id="token"
               name="Token"
-              placeholder="Token"
+              placeholder="Token in Lamports"
               className="inp"
               onChange={(e) => setNewToken(e.target.value)}
             />
           </div>
+
+          <div className="user-input"></div>
+          <div className="add" onClick={propagateDiv}>+</div>
+          <p className="unit">1000000000 Lamports = 1 sol</p>
           <button type="submit" value="submit" id="btn">
             Send
           </button>

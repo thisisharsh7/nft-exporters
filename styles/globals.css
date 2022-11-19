@@ -108,27 +108,49 @@ form input {
   font-weight: 600;
   padding-left: 1.4em;
   width: 100%;
-  border: none;
-}
-form div {
   border: 2px solid hsl(246, 25%, 77%);
   color: hsl(249, 10%, 26%);
 }
-form input[type="text"],
-input[type="password"],
-input[type="email"] {
-  border: none;
-  outline: none;
+form input:focus {
+  outline-color: hsl(70, 100%, 78%);
+}
+form .add{
+  box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.2);
+  color:white;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
+  width: min-content;
+  padding: 0em 1em ;
+  font-size:2em;
+  align-self: center;
+  background-color: rgb(255, 240, 156);
+}
+form .add:active{
+  transition: all;
+  transition-duration: 300ms;
+  scale: 0.8;
 }
 form div {
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+.user-input{
+  width: 100%;
+  gap: 0.8em;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 form .invalid {
   border: 2px solid hsl(0, 100%, 74%);
 }
-
+.unit{
+  font-size: 14px;
+}
 form button {
   height: 3em;
   background-color: hsl(61, 82%, 49%);
@@ -167,7 +189,7 @@ form button:hover {
 }
 
 @media only screen and (max-width: 768px) {
-  .main{
+  .main {
     flex-direction: column;
   }
 }
