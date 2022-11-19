@@ -115,8 +115,8 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
         <Image src={homeImage} alt="" />
         <div >
           <h1>Transactions Made Easy !</h1>
-     
-            <video controls src={"/multi.mp4"} style={{ width: "800px", height: "500px" }} autoPlay muted/>
+
+          <video controls src={"/multi.mp4"} style={{ width: "800px", height: "500px" }} autoPlay muted />
 
         </div>
       </div>
@@ -152,9 +152,11 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
           <button type="submit" value="submit" id="btn">
             Send
           </button>
-          <button className="btn-balance" onClick={checkBalance}>
-            balance
+
+          <button className="btn-balance" onClick={checkBalance} >
+            balance {checkAmount}
           </button>
+
         </form>
 
       </div>
