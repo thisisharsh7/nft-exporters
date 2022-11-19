@@ -1,3 +1,16 @@
+
+
+<table>
+  <tbody>
+  <tr>
+    <td ><a href="https://github.com/piyushgit011"><img alt="" src="https://avatars.githubusercontent.com/u/96625965?v=4" width="130px;"><br><sub><b> Piyush Aaryan</b></sub></a></td> </a></td>
+                <td ><a href="https://github.com/NiteshTiwari2002"><img alt="" src="https://avatars.githubusercontent.com/u/109803142?v=4" width="130px;"><br><sub><b> Nitesh Tiwari</b></sub></a></td> </a></td>
+        <td ><a href="https://github.com/thisisharsh7"><img alt="" src="https://avatars.githubusercontent.com/u/95894045?v=4" width="130px;"><br><sub><b> Harsh Kumar</b></sub></a></td> </a></td>
+  </tr>
+</tbody></table>
+
+
+
 # TypeScript Next.js example
 
 This is a really simple project that shows the usage of Next.js with TypeScript.
@@ -44,4 +57,5 @@ When we run `next dev` the next time, Next.js will start looking for any `.ts` o
 
 Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately.
+You can then include this, for example, in your `test` scripts. 
