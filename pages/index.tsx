@@ -22,17 +22,22 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
   const [checkAmount, setAmount] = useState(0);
   const [newAddress, setNewAddress] = useState('');
   const [newToken, setNewToken] = useState('');
-
-
-  const [refreshData, setRefreshData] = useState(1);
+  const [show1, setShow1] = useState('');
+  const [show2, setShow2] = useState('hide');
 
 
   const checkBalance = async () => {
+
     if (publicKey != null) {
-      const walletBalance = await connection.getBalance(publicKey, 'confirmed');
-      const walletBalanceSOL = (walletBalance / LAMPORTS_PER_SOL).toFixed(2);
-      setAmount(Number(walletBalanceSOL));
-      console.log(walletBalanceSOL);
+      console.log('harsh');
+      try {
+        const walletBalance = await connection.getBalance(publicKey, 'confirmed');
+        const walletBalanceSOL = (walletBalance / LAMPORTS_PER_SOL).toFixed(2);
+        setAmount(Number(walletBalanceSOL));
+        console.log(walletBalanceSOL);
+      } catch (e) {
+        alert('error');
+      }
     }
     else {
       console.log('⚠️ Wallet not connected')
@@ -41,21 +46,22 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
 
   const onClick = useCallback(async (e) => {
     e.preventDefault();
-    console.log(newAddress);
-    console.log(newToken);
-    console.log(e);
     if (publicKey != null) {
-      const transaction = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: new PublicKey('9h2Qd11CoMVtMftrGcvYN2ySaUSEisJGAQrv6hSWgc7T'), // replace the publickey with desred secondary wallet 
-          lamports: 1000000000, // transfering 1 SOL
-        })
-      );
+      try {
+        const transaction = new Transaction().add(
+          SystemProgram.transfer({
+            fromPubkey: publicKey,
+            toPubkey: new PublicKey('9XJxvFnSfG8BxHaeKRv617QhaNsnU28Rg2Fifr8ycrD7'), // replace the publickey with desred secondary wallet 
+            lamports: 1000000000, // transfering 1 SOL
+          })
+        );
 
-      const signature = await sendTransaction(transaction, connection);
-      await connection.confirmTransaction(signature, 'processed');
-      console.log(`Transaction confirmed: https://explorer.solana.com/tx/${signature}?cluster=devnet`);
+        const signature = await sendTransaction(transaction, connection);
+        await connection.confirmTransaction(signature, 'processed');
+        console.log(`Transaction confirmed: https://explorer.solana.com/tx/${signature}?cluster=devnet`);
+      } catch (e) {
+        alert('error');
+      }
     } else {
       console.log('⚠️ Wallet not connected');
     }
@@ -64,14 +70,14 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
 
   useEffect(() => {
     if (!publicKey) {
-      setRefreshData(1);
-      return;
+      setShow1('hide');
+      setShow2('');
     } else {
-      setRefreshData(0);
-
+      setShow1('');
+      setShow2('hide');
     }
 
-  }, [checkBalance])
+  }, [publicKey])
 
   return (
     <div className="page">
@@ -84,13 +90,13 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={(refreshData) ? 'main' : 'hide'}>
+      <div className={`main ${show2}`}>
         <Image src={homeImage} alt="" />
         <div >
-          <h1 >Transactions Made Easy !</h1>
+          <h1>Transactions Made Easy !</h1>
         </div>
       </div>
-      <div className={(refreshData) ? 'hide' : 'main'}>
+      <div className={`${show1} main`}>
 
 
 
@@ -109,7 +115,6 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
             <input
               id="token"
               name="Token"
-              type="text"
               placeholder="Token"
               className="inp"
               onChange={(e) => setNewToken(e.target.value)}
@@ -119,11 +124,12 @@ const Home: NextPage<HomePageProps> = ({ solanaNetwork }: HomePageProps) => {
             Send
           </button>
           <button className="btn-balance" onClick={checkBalance}>
-          balance
-        </button>
+            balance
+          </button>
         </form>
-       
+
       </div>
+
 
 
     </div>
